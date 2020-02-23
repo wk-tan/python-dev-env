@@ -1,0 +1,91 @@
+#+TITLE: Python Development Environment
+
+* pyenv
+- Remove the existing python package management
+
+- Ensure ~python~ commands are OS default
+#+BEGIN_SRC bash
+python --version
+python3 --version
+#+END_SRC
+
+- Install the latest version of ~pyenv~ in home folder 
+#+BEGIN_SRC bash
+cd ~
+curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+#+END_SRC
+
+- Check the version of ~pyenv~, then install any version of ~python~ and set it as global
+#+BEGIN_SRC bash
+pyenv --version
+pyenv install 3.7.6
+pyenv global 3.7.6
+#+END_SRC
+
+- Check the ~python~ commands are now the installed version
+#+BEGIN_SRC bash
+python --version
+python3 --version
+#+END_SRC
+
+* pip
+- Update ~pip~ and list all ~pip~ installed packages
+#+BEGIN_SRC bash
+pip install -U pip
+pip list
+#+END_SRC
+
+* pipx
+- Install ~pipx~ for installing global packages and list all ~pipx~ installed packages
+#+BEGIN_SRC bash
+python -m pip install pipx
+pipx list
+#+END_SRC
+
+- Install ~poetry~ and ~jupyterlab~ as global packages
+#+BEGIN_SRC bash
+pipx install poetry
+pipx install jupyterlab --include-deps
+pipx list
+#+END_SRC
+ 
+* poetry
+- List ~peotry~ config and set creation of virtual environment to be within project folder
+#+BEGIN_SRC bash
+poetry config --list
+poetry config virtualenvs.in-project true
+#+END_SRC
+
+- Create a new project and install packages in it
+#+BEGIN_SRC bash
+poetry new test
+cd test
+poetry add pandas
+#+END_SRC
+
+- Check if packages are installed correctly
+#+BEGIN_SRC bash
+cat pyproject.toml
+#+END_SRC
+
+- Install packages in an existing ~poetry~ project folder
+#+BEGIN_SRC bash
+cd test
+poetry install
+#+END_SRC
+
+- Create a new kernel with local version of python and packages
+#+BEGIN_SRC bash
+poetry add ipykernel
+poetry run python -m ipykernel install --user --name test --display "Test"
+#+END_SRC
+
+- Check if the kernel is created properly
+#+BEGIN_SRC bash
+jupyter kernelspec list
+#+END_SRC
+
+- To remove the kernel
+#+BEGIN_SRC bash
+jupyter kernelspec uninstall test -y
+#+END_SRC
