@@ -35,6 +35,11 @@ pip install -U pip
 pip list
 #+END_SRC
 
+- Install ~jupyterlab~
+#+BEGIN_SRC bash
+pip install jupyterlab
+#+END_SRC
+
 * pipx
 - Install ~pipx~ for installing global packages and list all ~pipx~ installed packages
 #+BEGIN_SRC bash
@@ -42,10 +47,9 @@ python -m pip install pipx
 pipx list
 #+END_SRC
 
-- Install ~poetry~ and ~jupyterlab~ as global packages
+- Install ~poetry~ as global package
 #+BEGIN_SRC bash
 pipx install poetry
-pipx install jupyterlab --include-deps
 pipx list
 #+END_SRC
  
