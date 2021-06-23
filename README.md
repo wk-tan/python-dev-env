@@ -44,7 +44,7 @@ pip list
 
 7. Install JupyterLab and multiple commonly used packages
 ```bash
-pip install jupyterlab prefect pandas
+pip install jupyter jupyterlab black flake8 isort
 ```
 
 ## Poetry
@@ -88,4 +88,21 @@ jupyter kernelspec list
 4. Log into JupyterLab and verify if the new kernel is available
 ```bash
 jupyter lab
+```
+
+## Extras
+### Global JupyterLab
+1. Export path for JupyterLab
+```bash
+export PATH="$HOME/.pyenv/versions/{global_version}/bin:$PATH"
+```
+
+### Configure black, flake8 and isort in VS Code
+1. Set following key-value pairs in `settings.json`
+```json
+{
+    "python.defaultInterpreterPath": "/home/waikiat/.pyenv/versions/{global_version}/bin/python",
+    "python.formatting.blackPath": "/home/waikiat/.pyenv/versions/{global_version}/bin/black",
+    "python.linting.flake8Path": "/home/waikiat/.pyenv/versions/{global_version}/bin/flake8",
+}
 ```
