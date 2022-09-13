@@ -21,30 +21,32 @@ pyenv --version
 pyenv install -l 
 ```
 
-4. Install multiple versions of `python` and set one of them at global level
+4. Install Python build dependencies following this [link](https://github.com/pyenv/pyenv/wiki#suggested-build-environment).
+
+5. Install multiple versions of `python` and set one of them at global level.
 ```bash
-pyenv install 3.7.10
-pyenv install 3.8.8
-pyenv install 3.9.2
-pyenv global 3.8.8
+pyenv install 3.8.13
+pyenv install 3.9.13
+pyenv install 3.10.5
+pyenv global 3.9.13
 pyenv versions
 ```
 
-5. Verify `python 3.8.8` is set at global level
+6. Verify `python 3.9.13` is set at global level.
 ```bash
 echo `python --version`; echo `python3 --version`
 echo `which python`; echo `which python3`
 ```
 
-6. Upgrade `pip` and list all `pip` installed packages
+7. Upgrade `pip` and list all `pip` installed packages.
 ```bash
 pip install -U pip
 pip list
 ```
 
-7. Install JupyterLab and multiple commonly used packages
+8. Install JupyterLab and multiple commonly used packages.
 ```bash
-pip install jupyter jupyterlab black flake8 isort
+pip install jupyter jupyterlab black flake8 isort poetry-kernel
 ```
 
 ## Poetry
@@ -53,8 +55,7 @@ pip install jupyter jupyterlab black flake8 isort
 1. Install the latest version of `poetry` in home folder.
 ```bash
 cd ~
-curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-
+curl -sSL https://install.python-poetry.org | python3 -
 ```
 
 2. List `poetry` config and set creation of virtual environment to be within a project folder.
@@ -63,10 +64,7 @@ poetry config --list
 poetry config virtualenvs.in-project true
 ```
 
-## Start a new project
-1. WIP
-
-## Continue from an existing project
+### Continue from an existing project
 1. Clone a GitHub repository which is developed using different `python` version.
 ```bash
 git clone git@github.com:{username}/{awesome_project}.git
@@ -79,30 +77,25 @@ pyenv local {python_version}
 poetry install
 ```
 
-3. Utilize JupyterLab at global level with dependencies installed within `.venv`. Note that, the `python` command used here is defined in step 1. 
-```bash
-poetry run python -m ipykernel install --user --name {awesome_name} --display {Awesome Name}
-jupyter kernelspec list
-```
-
-4. Log into JupyterLab and verify if the new kernel is available
-```bash
-jupyter lab
-```
-
 ## Extras
-### Global JupyterLab
-1. Export path for JupyterLab
+### Utilize Poetry kernel in JupyterLab
+1. Install `ipykernel` as a development dependency.
 ```bash
-export PATH="$HOME/.pyenv/versions/{global_version}/bin:$PATH"
+poetry install --dev ipykernel
 ```
+
+2. Choose Poetry as a running kernel.
 
 ### Configure black, flake8 and isort in VS Code
-1. Set following key-value pairs in `settings.json`
+1. Set following key-value pairs in `settings.json`.
 ```json
 {
-    "python.defaultInterpreterPath": "/home/waikiat/.pyenv/versions/{global_version}/bin/python",
-    "python.formatting.blackPath": "/home/waikiat/.pyenv/versions/{global_version}/bin/black",
-    "python.linting.flake8Path": "/home/waikiat/.pyenv/versions/{global_version}/bin/flake8",
+  "python.defaultInterpreterPath": "/home/waikiat/.pyenv/shims/python",
+  "python.sortImports.path": "/home/waikiat/.pyenv/shims/isort",
+  "python.sortImports.args": [
+    "--profile=black",
+  ],
+  "python.formatting.blackPath": "/home/waikiat/.pyenv/shims/black",
+  "python.linting.flake8Path": "/home/waikiat/.pyenv/shims/flake8"
 }
 ```
